@@ -21,7 +21,7 @@ jobs:
         run: |
           cd public                                                            
           curl -L -o eventcalendar.png "https://drive.google.com/uc?export=view&id=1Q1iq6mE4Ha52Vd_BeJH97Vcer0yODIvA"                           
-          ffmpeg -framerate 1 -i eventcalendar.png -vframes 1 -vf "scale=trunc(iw/2)*2:trunc(ih/2)*2" -vcodec libx264 -pix_fmt yuv420p -crf 1 -r 60 eventcalendar.mp4                    
+          ffmpeg -framerate 1 -i eventcalendar.png -vframes 1 -vf "scale=4096:4096" -vcodec libx264 -pix_fmt yuv420p -crf 1 -r 60 eventcalendar.mp4                    
           sudo rm *.png          
       - name: gh-pages
         uses: peaceiris/actions-gh-pages@v3

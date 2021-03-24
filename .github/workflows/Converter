@@ -1,0 +1,31 @@
+name: clone
+on:  
+  schedule:    
+    - cron:  '*/5 * * * *'
+  workflow_dispatch:
+  push:
+    branches:
+      - master
+jobs:        
+  Main:      
+    name: main
+    runs-on: ubuntu-20.04
+    steps:
+      - name : init
+        run: |
+          sudo apt-get update -y
+          sudo apt-get install ffmpeg -y
+          mkdir public
+          echo "<center><h1>404 NOT FOUND</h1></center>" > public/404.html
+      - name: clone
+        run: |
+          cd public                                                            
+          curl -L -o eventcalendar.png "https://drive.google.com/uc?export=view&id=1Q1iq6mE4Ha52Vd_BeJH97Vcer0yODIvA"                           
+          ffmpeg -framerate 1 -i eventcalendar.png -vframes 1 -vf "scale=trunc(iw/2)*2:trunc(ih/2)*2" -vcodec libx264 -pix_fmt yuv420p -crf 1 -r 60 eventcalendar.mp4                    
+          sudo rm *.png          
+      - name: gh-pages
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+               github_token: ${{ secrets.GITHUB_TOKEN }}
+               publish_dir: ./public
+               force_orphan: false

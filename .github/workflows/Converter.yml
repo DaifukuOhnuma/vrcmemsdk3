@@ -17,12 +17,6 @@ jobs:
           sudo apt-get install ffmpeg -y
           mkdir public
           echo "<center><h1>404 NOT FOUND</h1></center>" > public/404.html
-      - name: Acquire Google access token
-        id: google-access-token
-        uses: playeveryware/action-google-access-token@v1
-        with:
-          credentials: ${{ secrets.GOOGLE_SERVICE_ACCOUNT_CREDENTIALS }}
-          scope: 'https://www.googleapis.com/auth/drive.readonly'
       - name: clone
         run: |
           cd public

@@ -20,7 +20,6 @@ jobs:
       - name: clone
         run: |
           cd public
-          sudo rm *.png
           curl -L -o eventcalendar.png "https://drive.google.com/uc?export=view&id=1Q1iq6mE4Ha52Vd_BeJH97Vcer0yODIvA"                           
           ffmpeg -framerate 1 -i eventcalendar.png -vframes 1 -vf "scale=1100:1600" -vcodec libx264 -pix_fmt yuv420p -crf 1 -r 60 eventcalendar.mp4  
           curl -L -o eventcalendar_pink.png "https://drive.google.com/uc?export=view&id=1EBflHc0YfJHCA-6h_6hgeAphm_bsXvff"                           
